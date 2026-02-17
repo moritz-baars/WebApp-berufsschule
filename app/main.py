@@ -21,7 +21,7 @@ app.add_middleware(
 )
 
 # DB Tabellen erstellen (für den Anfang ok; später Alembic)
-Base.metadata.create_all(bind=engine)
+#Base.metadata.create_all(bind=engine)
 
 # Router registrieren
 app.include_router(web_router)
