@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Admin - {{ event.title }}{% endblock %}
+
+{% block content %}
+<div class="container-wide">
+    <section class="card">
+    <h1>{{ event.title }}</h1>
+
+    <p class="muted">
+        {% if event.starts_at %}Start: {{ event.starts_at.strftime("%d.%m.%Y %H:%M") }}{% else %}Start: offen{% endif %}
+        {% if event.location %} · Ort: {{ event.location }}{% endif %}
+    </p>
+
+    <p>{{ event.description or "" }}</p>
+
+    <div class="event-actions">
+        <a class="btn-link" href="/admin/events">← Zurück</a>
+        <a class="btn-primary btn-small" href="/admin/events/{{ event.id }}/edit">Bearbeiten</a>
+    </div>
+    </section>
+
+    <section class="card" style="margin-top: 1rem;">
+    <h2>Teilnehmer</h2>
+
+    {% if attendees %}
+        <ul>
+        {% for b in attendees %}
+            <li>
+            <strong>{{ b.user.name }}</strong> ({{ b.user.email }})
+            <span class="muted small">· gebucht am {{ b.booked_at.strftime("%d.%m.%Y %H:%M") }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p class="muted">Noch keine Teilnehmer.</p>
+    {% endif %}
+    </section>
+</div>
+{% endblock %}

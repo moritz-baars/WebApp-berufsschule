@@ -52,3 +52,17 @@ def get_event_by_id(db: Session, event_id: int) -> Optional[Event]:
 
 def list_all_events(db: Session) -> List[Event]:
     return db.query(Event).order_by(Event.id.desc()).all()
+
+def create_event(db: Session, data: dict) -> Event:
+    e = Event(**data)
+    db.add(e)
+    db.commit()
+    db.refresh(e)
+    return e
+
+def update_event(db: Session, event: Event, data: dict) -> Event:
+    for k, v in data.items():
+        setattr(event, k, v)
+    db.commit()
+    db.refresh(event)
+    return event

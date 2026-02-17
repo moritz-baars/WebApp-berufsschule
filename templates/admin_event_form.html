@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}{% if mode == "create" %}Neues Event{% else %}Event bearbeiten{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container-narrow">
+    <section class="card">
+    <h1>{% if mode == "create" %}Neues Event{% else %}Event bearbeiten{% endif %}</h1>
+
+    {% if error %}
+        <div class="error" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" novalidate>
+        <div class="form-group">
+        <label for="title">Titel</label>
+        <input id="title" name="title" type="text" required value="{{ event.title if event else '' }}">
+        </div>
+
+        <div class="form-group">
+        <label for="description">Beschreibung</label>
+        <input id="description" name="description" type="text" value="{{ event.description if event and event.description else '' }}">
+        </div>
+
+        <div class="form-group">
+        <label for="location">Ort</label>
+        <input id="location" name="location" type="text" value="{{ event.location if event and event.location else '' }}">
+        </div>
+
+        <div class="form-group">
+        <label for="starts_at">Start</label>
+        <input id="starts_at" name="starts_at" type="datetime-local"
+                value="{% if event and event.starts_at %}{{ event.starts_at.strftime('%Y-%m-%dT%H:%M') }}{% endif %}">
+        </div>
+
+        <div class="form-group">
+        <label for="ends_at">Ende</label>
+        <input id="ends_at" name="ends_at" type="datetime-local"
+                value="{% if event and event.ends_at %}{{ event.ends_at.strftime('%Y-%m-%dT%H:%M') }}{% endif %}">
+        </div>
+
+        <div class="form-group">
+        <label for="max_participants">Max. Teilnehmer</label>
+        <input id="max_participants" name="max_participants" type="number" min="0"
+                value="{{ event.max_participants if event else 0 }}">
+        </div>
+
+        <div class="form-group">
+        <label class="check">
+            <input type="checkbox" name="is_active" value="1" {% if event and event.is_active %}checked{% elif mode=='create' %}checked{% endif %}>
+            Aktiv
+        </label>
+        </div>
+
+        <div class="event-actions">
+        <a class="btn-link" href="/admin/events">Abbrechen</a>
+        <button class="btn-primary" type="submit">
+            {% if mode == "create" %}Erstellen{% else %}Speichern{% endif %}
+        </button>
+        </div>
+    </form>
+    </section>
+</div>
+{% endblock %}

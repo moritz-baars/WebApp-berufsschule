@@ -3,21 +3,46 @@
 
 {% block content %}
 <div class="container-wide">
-    <section class="card">
-    <h1>Admin: Events verwalten</h1>
+    <section class="page-header">
+    <h1>Admin: Events</h1>
+    <p class="muted">Events anlegen, bearbeiten und Teilnehmer einsehen.</p>
+    </section>
+
+    <div class="page-footer" style="margin-top: 0; margin-bottom: 1rem;">
+    <a class="btn-primary btn-small" href="/admin/events/new">+ Neues Event</a>
+    </div>
 
     {% if events %}
-        <ul>
+    <div class="card-grid">
         {% for e in events %}
-            <li>
-            <strong>{{ e.title }}</strong>
-            <a class="btn-link" href="/events/{{ e.id }}">Ansehen</a>
-            </li>
+        <article class="event-card">
+            <div class="event-meta">
+            {% if e.starts_at %}
+                <div class="pill">{{ e.starts_at.strftime("%d.%m.%Y %H:%M") }}</div>
+            {% else %}
+                <div class="pill">Termin folgt</div>
+            {% endif %}
+            {% if e.is_active %}
+                <div class="pill pill-light">aktiv</div>
+            {% else %}
+                <div class="pill pill-light">inaktiv</div>
+            {% endif %}
+            </div>
+
+            <h2 class="event-title">{{ e.title }}</h2>
+            <p class="event-desc">{{ e.description or "Keine Beschreibung vorhanden." }}</p>
+
+            <div class="event-actions">
+            <a class="btn-link" href="/admin/events/{{ e.id }}">Admin-Ansicht</a>
+            <a class="btn-primary btn-small" href="/events/{{ e.id }}">User-Ansicht</a>
+            </div>
+        </article>
         {% endfor %}
-        </ul>
+    </div>
     {% else %}
-        <p class="muted">Keine Events vorhanden.</p>
-    {% endif %}
+    <section class="card">
+        <p class="muted">Noch keine Events vorhanden.</p>
     </section>
 </div>
+{% endif %}
 {% endblock %}

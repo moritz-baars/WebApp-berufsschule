@@ -71,3 +71,15 @@ def reactivate_booking(db: Session, booking: Booking) -> Booking:
     db.commit()
     db.refresh(booking)
     return booking
+
+def list_attendees_for_event(db: Session, event_id: int) -> List[Booking]:
+    return (
+        db.query(Booking)
+        .options(joinedload(Booking.user))
+        .filter(
+            Booking.event_id == event_id,
+            Booking.status == "booked"
+        )
+        .order_by(Booking.booked_at.desc())
+        .all()
+    )
