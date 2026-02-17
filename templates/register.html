@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Registrieren{% endblock %}
+
+{% block content %}
+<div class="container-narrow">
+    <section class="card">
+    <h1>Registrieren</h1>
+
+    {% if error %}
+        <div class="error" role="alert">
+        {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" novalidate>
+
+        <div class="form-group">
+        <label for="name">Name</label>
+        <input
+            id="name"
+            name="name"
+            type="text"
+            value="{{ name or '' }}"
+            required>
+        </div>
+
+        <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input
+            id="email"
+            name="email"
+            type="email"
+            value="{{ email or '' }}"
+            required>
+        </div>
+
+        <div class="form-group">
+        <label for="password">Passwort</label>
+        <input
+            id="password"
+            name="password"
+            type="password"
+            required>
+        </div>
+
+        <button type="submit" class="btn-primary">
+        Registrieren
+        </button>
+
+    </form>
+
+    <p class="small">
+        Bereits ein Konto?
+        <a href="/auth/login">Zum Login</a>
+    </p>
+    </section>
+</div>
+{% endblock %}
