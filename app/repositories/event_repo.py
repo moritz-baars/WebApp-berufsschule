@@ -49,3 +49,6 @@ def list_events(
 
 def get_event_by_id(db: Session, event_id: int) -> Optional[Event]:
     return db.query(Event).filter(Event.id == event_id).first()
+
+def list_all_events(db: Session) -> List[Event]:
+    return db.query(Event).order_by(Event.id.desc()).all()

@@ -1,36 +1,41 @@
 <!doctype html>
 <html lang="de">
-<head>
-  <meta charset="utf-8">
-  <title>{% block title %}EventApp{% endblock %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/static/styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}EventApp{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-full">
+        <a href="/" class="logo">EventApp</a>
 
-<header class="navbar">
-  <div class="nav-full">
-    <a href="/" class="logo">EventApp</a>
+        <nav class="nav-links">
+          {% if user %}
 
-    <nav class="nav-links">
-      {% if user %}
-        <span>Hallo {{ user.name }}</span>
-        <form method="post" action="/auth/logout">
-          <button class="btn-link">Logout</button>
-        </form>
-      {% else %}
-        <a class="btn-link" href="/auth/login">Login</a>
-        <a class="btn-primary btn-small" href="/auth/register">Registrieren</a>
-      {% endif %}
-    </nav>
-  </div>
-</header>
+          <a class="btn-link" href="/bookings/mine"> Meine Buchungen </a>
 
+          {% if user.role == "admin" %}
+          <a class="btn-link" href="/admin/events"> Admin </a>
+          {% endif %}
 
+          <span class="nav-user">Hallo {{ user.name }}</span>
 
-<main>
-  {% block content %}{% endblock %}
-</main>
+          <form method="post" action="/auth/logout" class="nav-form">
+            <button class="btn-link" type="submit">Logout</button>
+          </form>
 
-</body>
+          {% else %}
+          <a class="btn-link" href="/auth/login">Login</a>
+          <a class="btn-primary btn-small" href="/auth/register"
+            >Registrieren</a
+          >
+          {% endif %}
+        </nav>
+      </div>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+  </body>
 </html>

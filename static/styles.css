@@ -47,6 +47,16 @@ body {
   justify-content: space-between;
 }
 
+.navbar .btn-link {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.35);
+  color: white;
+}
+
+.navbar .btn-link:hover {
+  border-color: rgba(255,255,255,0.65);
+}
+
 .logo {
   font-weight: 700;
   font-size: 1.2rem;
@@ -68,20 +78,17 @@ body {
   margin: 0;
 }
 
-/* Link-Button (für Login/Logout) */
 .btn-link {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  color: white;
-  padding: 0.45rem 0.75rem;
-  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  color: #1f2937;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
   text-decoration: none;
-  cursor: pointer;
-  font: inherit;
 }
 
 .btn-link:hover {
-  border-color: rgba(255, 255, 255, 0.65);
+  background: #f3f4f6;
 }
 
 /* kleine Variante für Navbar */
@@ -275,3 +282,17 @@ input:focus {
 .btn-disabled:hover {
   background: #d1d5db;
 }
+
+.btn-danger {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+

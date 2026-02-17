@@ -34,3 +34,9 @@ def get_events_for_homepage(
             free_map[e.id] = None
 
     return events, free_map
+
+
+def get_all_events_for_admin(db: Session) -> List[Event]:
+    # Hier wäre später Platz für Admin-spezifische Regeln
+    # z.B. auch inaktive und vergangene Events anzeigen
+    return event_repo.list_all_events(db)

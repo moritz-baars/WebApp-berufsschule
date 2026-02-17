@@ -1,1 +1,23 @@
-<h1>Admin Events</h1>
+{% extends "base.html" %}
+{% block title %}Admin - Events{% endblock %}
+
+{% block content %}
+<div class="container-wide">
+    <section class="card">
+    <h1>Admin: Events verwalten</h1>
+
+    {% if events %}
+        <ul>
+        {% for e in events %}
+            <li>
+            <strong>{{ e.title }}</strong>
+            <a class="btn-link" href="/events/{{ e.id }}">Ansehen</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p class="muted">Keine Events vorhanden.</p>
+    {% endif %}
+    </section>
+</div>
+{% endblock %}

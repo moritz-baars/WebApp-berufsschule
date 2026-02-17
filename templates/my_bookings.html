@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Meine Buchungen{% endblock %}
+
+{% block content %}
+<div class="container-wide">
+<section class="page-header">
+  <h1>Meine Buchungen</h1>
+  <p class="muted">Hier siehst du deine angemeldeten Events.</p>
+</section>
+
+{% if bookings %}
+  <div class="card-grid">
+    {% for b in bookings %}
+      <article class="event-card">
+
+        <div class="event-meta">
+          {% if b.event.starts_at %}
+            <div class="pill">
+              {{ b.event.starts_at.strftime("%d.%m.%Y %H:%M") }}
+            </div>
+          {% endif %}
+          {% if b.event.location %}
+            <div class="pill pill-light">
+              {{ b.event.location }}
+            </div>
+          {% endif %}
+        </div>
+
+        <h2 class="event-title">{{ b.event.title }}</h2>
+
+        <p class="event-desc">
+          {{ b.event.description or "Keine Beschreibung vorhanden." }}
+        </p>
+
+        <div class="event-actions">
+          <a class="btn-link" href="/events/{{ b.event.id }}">
+            Details
+          </a>
+
+          {% if b.status == "booked" %}
+            <form method="post" action="/bookings/{{ b.id }}/cancel">
+              <button class="btn-danger btn-small" type="submit">
+                Stornieren
+              </button>
+            </form>
+          {% else %}
+            <span class="muted small">Storniert</span>
+          {% endif %}
+        </div>
+
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <section class="card">
+    <p class="muted">Du hast noch keine Buchungen.</p>
+  </section>
+  </div>
+{% endif %}
+{% endblock %}
