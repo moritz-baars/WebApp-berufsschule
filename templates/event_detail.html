@@ -1,1 +1,36 @@
-<h1>Event Detail</h1>
+{% extends "base.html" %} {% block title %}{{ event.title }}{% endblock %} {%
+block content %}
+<div class="container-wide">
+  <section class="card">
+    <h1>{{ event.title }}</h1>
+
+    {% if error %}
+    <div class="error" role="alert">{{ error }}</div>
+    {% endif %} {% if event.starts_at %}
+    <p class="muted">Start: {{ event.starts_at.strftime("%d.%m.%Y %H:%M") }}</p>
+    {% endif %} {% if event.location %}
+    <p class="muted">Ort: {{ event.location }}</p>
+    {% endif %} {% if event.description %}
+    <p>{{ event.description }}</p>
+    {% endif %}
+
+    <div class="event-actions">
+      <a class="btn-link" href="/">Zurück</a>
+
+      {% if user %}
+      <a
+        class="btn-primary btn-small"
+        href="/events/{{ event.id }}/book/confirm"
+      >
+        Buchen
+      </a>
+      {% else %}
+      <button class="btn-disabled btn-small" disabled>Buchen</button>
+      <p class="muted small">
+        Bitte <a href="/auth/login">einloggen</a>, um zu buchen.
+      </p>
+      {% endif %}
+    </div>
+  </section>
+</div>
+{% endblock %}

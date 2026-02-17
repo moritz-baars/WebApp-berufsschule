@@ -20,15 +20,15 @@ def home(
     db: Session = Depends(get_db),
     user = Depends(get_current_user_optional),
 ):
-    events = event_service.get_events_for_homepage(db=db, q=q, active=active)
-
+    events, free_map = event_service.get_events_for_homepage(db=db, q=q, active=active)
     return templates.TemplateResponse(
-        "home.html",
-        {
-            "request": request,
-            "events": events,
-            "q": q or "",
-            "active": active,
-            "user": user,
-        },
-    )
+    "home.html",
+    {
+        "request": request,
+        "events": events,
+        "free_map": free_map,
+        "q": q or "",
+        "active": active,
+        "user": user
+    }
+)

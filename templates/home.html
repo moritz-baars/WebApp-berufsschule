@@ -1,9 +1,6 @@
-{% extends "base.html" %}
-{% block title %}Events{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Events{% endblock %} {% block content
+%}
 <div class="container-wide">
-
   <section class="page-header">
     <div>
       <h1>Events</h1>
@@ -11,11 +8,22 @@
     </div>
   </section>
 
-  <form class="filter-bar" method="get" role="search" aria-label="Events filtern">
+  <form
+    class="filter-bar"
+    method="get"
+    role="search"
+    aria-label="Events filtern"
+  >
     <div class="filter-row">
       <div class="filter-item">
         <label for="q">Suche</label>
-        <input id="q" name="q" type="text" value="{{ q }}" placeholder="z.B. Python, Workshop, Kurs">
+        <input
+          id="q"
+          name="q"
+          type="text"
+          value="{{ q }}"
+          placeholder="z.B. Python, Workshop, Kurs"
+        />
       </div>
 
       <div class="filter-item filter-check">
@@ -25,6 +33,7 @@
         </label>
       </div>
 
+
       <div class="filter-item">
         <button class="btn-primary btn-small" type="submit">Filtern</button>
         <a class="btn-link" href="/">Reset</a>
@@ -33,44 +42,46 @@
   </form>
 
   {% if events %}
-    <div class="card-grid" role="list" aria-label="Eventliste">
-      {% for e in events %}
-        <article class="event-card" role="listitem">
-          <div class="event-meta">
-            {% if e.starts_at %}
-              <div class="pill">{{ e.starts_at.strftime("%d.%m.%Y %H:%M") }}</div>
-            {% else %}
-              <div class="pill">Termin folgt</div>
-            {% endif %}
-            {% if e.location %}
-              <div class="pill pill-light">{{ e.location }}</div>
-            {% endif %}
-          </div>
+  <div class="card-grid" role="list" aria-label="Eventliste">
+    {% for e in events %}
+    <article class="event-card" role="listitem">
+      <div class="event-meta">
+        {% if e.starts_at %}
+        <div class="pill">{{ e.starts_at.strftime("%d.%m.%Y %H:%M") }}</div>
+        {% else %}
+        <div class="pill">Termin folgt</div>
+        {% endif %} {% if e.location %}
+        <div class="pill pill-light">{{ e.location }}</div>
+        {% endif %}
+      </div>
 
-          <h2 class="event-title">{{ e.title }}</h2>
+      <h2 class="event-title">{{ e.title }}</h2>
 
-          {% if e.description %}
-            <p class="event-desc">{{ e.description }}</p>
-          {% else %}
-            <p class="event-desc muted">Keine Beschreibung vorhanden.</p>
-          {% endif %}
+      {% if e.description %}
+      <p class="event-desc">{{ e.description }}</p>
+      {% else %}
+      <p class="event-desc muted">Keine Beschreibung vorhanden.</p>
+      {% endif %}
 
-          <div class="event-actions">
-            <a class="btn-primary btn-small" href="/events/{{ e.id }}">Details</a>
+      <div class="event-actions">
+        <a class="btn-primary btn-small" href="/events/{{ e.id }}">Details</a>
 
-            {% if e.max_participants and e.max_participants > 0 %}
-              <span class="muted small">Max: {{ e.max_participants }}</span>
-            {% endif %}
-          </div>
-        </article>
-      {% endfor %}
-    </div>
+        {% set free = free_map.get(e.id) %} {% if free is none %}
+        <span class="muted small">Unbegrenzt</span>
+        {% else %} {% if free > 0 %}
+        <span class="muted small">Noch {{ free }} frei</span>
+        {% else %}
+        <span class="pill pill-danger">Ausgebucht</span>
+        {% endif %} {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
   {% else %}
-    <div class="empty-state">
-      <h2>Keine Events gefunden</h2>
-      <p class="muted">Passe den Filter an oder setze ihn zurück.</p>
-    </div>
+  <div class="empty-state">
+    <h2>Keine Events gefunden</h2>
+    <p class="muted">Passe den Filter an oder setze ihn zurück.</p>
+  </div>
   {% endif %}
-
 </div>
 {% endblock %}

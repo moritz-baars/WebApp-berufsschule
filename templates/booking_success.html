@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Buchung erfolgreich{% endblock %} {%
+block content %}
+<div class="container-wide">
+  <section class="card">
+    <h1>Buchung erfolgreich ✅</h1>
+
+    {% if event %}
+    <p>Du bist jetzt angemeldet für:</p>
+    <p><strong>{{ event.title }}</strong></p>
+    <a class="btn-primary btn-small" href="/events/{{ event.id }}"
+      >Zurück zum Event</a
+    >
+    {% else %}
+    <p>Deine Buchung wurde gespeichert.</p>
+    <a class="btn-primary btn-small" href="/">Zurück zur Übersicht</a>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

@@ -1,1 +1,16 @@
-<h1>Booking Confirm</h1>
+{% extends "base.html" %} {% block title %}Buchung bestätigen{% endblock %} {%
+block content %}
+<div class="container-wide">
+  <section class="card">
+    <h1>Buchung bestätigen</h1>
+
+    <p>Du möchtest dich für folgendes Event anmelden:</p>
+    <p><strong>{{ event.title }}</strong></p>
+
+    <form method="post" action="/events/{{ event.id }}/book">
+      <button class="btn-primary" type="submit">Ja, verbindlich buchen</button>
+      <a class="btn-link" href="/events/{{ event.id }}">Abbrechen</a>
+    </form>
+  </section>
+</div>
+{% endblock %}

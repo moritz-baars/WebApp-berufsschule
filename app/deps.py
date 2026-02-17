@@ -1,6 +1,6 @@
 from .db import SessionLocal
 from typing import Generator, Optional
-from fastapi import Depends, Request
+from fastapi import Depends, Request, HTTPException
 from .models import User
 from sqlalchemy.orm import Session
 
@@ -22,4 +22,22 @@ def get_current_user_optional(
         return None
 
     user = db.query(User).filter(User.id == user_id).first()
+    return user
+
+def get_current_user(
+    request: Request,
+    db: Session = Depends(get_db)
+) -> User:
+
+    user_id = request.session.get("user_id")
+
+    if not user_id:
+        raise HTTPException(status_code=401)
+
+    user = db.query(User).filter(User.id == user_id).first()
+
+    if not user:
+        request.session.clear()
+        raise HTTPException(status_code=401)
+
     return user
