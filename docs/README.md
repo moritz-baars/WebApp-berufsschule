@@ -78,6 +78,7 @@ pip freeze > requirements.txt
 ## Server starten
 
 Vom Projekt-Root aus:
+venv\Scripts\activate
 uvicorn app.main:app --reload
 
 Server erreichbar unter:
