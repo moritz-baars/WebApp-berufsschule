@@ -2,7 +2,7 @@ body {
   font-family: system-ui, sans-serif;
   margin: 0;
   background: #f4f6f8;
-  color: #222;
+  color: #1f2937;
   padding-top: 64px;
 }
 
@@ -41,7 +41,7 @@ body {
 
 .nav-full {
   width: 100%;
-  padding: 0 2rem; /* Abstand vom Rand */
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,12 +49,13 @@ body {
 
 .navbar .btn-link {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.35);
+  border: 1px solid rgba(255,255,255,0.55);
   color: white;
 }
 
 .navbar .btn-link:hover {
-  border-color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.85);
 }
 
 .logo {
@@ -71,7 +72,7 @@ body {
 }
 
 .nav-user {
-  opacity: 0.9;
+  color: rgba(255,255,255,0.95);
 }
 
 .nav-form {
@@ -80,7 +81,7 @@ body {
 
 .btn-link {
   background: transparent;
-  border: 1px solid #d1d5db;
+  border: 1px solid #9ca3af;
   color: #1f2937;
   padding: 0.6rem 1rem;
   border-radius: 4px;
@@ -89,6 +90,7 @@ body {
 
 .btn-link:hover {
   background: #f3f4f6;
+  border-color: #6b7280;
 }
 
 /* kleine Variante für Navbar */
@@ -120,17 +122,25 @@ body {
 input {
   padding: 0.6rem;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #9ca3af;
   font-size: 1rem;
+  color: #111827;
+  background: #ffffff;
+}
+
+input::placeholder {
+  color: #4b5563;
+  opacity: 1;
 }
 
 input:focus {
-  outline: 2px solid #2563eb;
-  border-color: #2563eb;
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+  border-color: #1d4ed8;
 }
 
 .btn-primary {
-  background: #2563eb;
+  background: #1d4ed8;
   color: white;
   border: none;
   padding: 0.7rem 1.2rem;
@@ -139,33 +149,37 @@ input:focus {
 }
 
 .btn-primary:hover {
-  background: #1d4ed8;
+  background: #1e40af;
 }
 
 .error {
   background: #fee2e2;
-  color: #991b1b;
+  color: #7f1d1d;
   padding: 0.8rem;
   margin-bottom: 1rem;
   border-radius: 4px;
 }
 
 .small {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-top: 1rem;
 }
 
 .muted {
-  color: #6b7280;
+  color: #4b5563;
 }
+
 .page-header {
   margin-bottom: 1rem;
 }
+
 .page-header h1 {
   margin: 0;
 }
+
 .page-header p {
   margin: 0.25rem 0 0;
+  color: #4b5563;
 }
 
 .filter-bar {
@@ -185,7 +199,9 @@ input:focus {
 
 .filter-item label {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
   margin-bottom: 0.25rem;
 }
 
@@ -194,6 +210,7 @@ input:focus {
   gap: 0.5rem;
   align-items: center;
   margin: 0;
+  color: #111827;
 }
 
 .card-grid {
@@ -207,6 +224,7 @@ input:focus {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (max-width: 600px) {
   .card-grid {
     grid-template-columns: 1fr;
@@ -230,7 +248,7 @@ input:focus {
 }
 
 .pill {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   padding: 0.25rem 0.5rem;
   border-radius: 999px;
   background: #e5e7eb;
@@ -239,6 +257,7 @@ input:focus {
 
 .pill-light {
   background: #f3f4f6;
+  color: #374151;
 }
 
 .pill-danger {
@@ -249,11 +268,13 @@ input:focus {
 .event-title {
   font-size: 1.05rem;
   margin: 0;
+  color: #111827;
 }
 
 .event-desc {
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
+  color: #1f2937;
 }
 
 .event-actions {
@@ -272,7 +293,7 @@ input:focus {
 
 .btn-disabled {
   background: #d1d5db;
-  color: #6b7280;
+  color: #374151;
   border: none;
   padding: 0.6rem 1rem;
   border-radius: 4px;
@@ -284,7 +305,7 @@ input:focus {
 }
 
 .btn-danger {
-  background: #dc2626;
+  background: #b91c1c;
   color: white;
   border: none;
   padding: 0.6rem 1rem;
@@ -293,6 +314,15 @@ input:focus {
 }
 
 .btn-danger:hover {
-  background: #b91c1c;
+  background: #991b1b;
 }
 
+/* Einheitlicher sichtbarer Tastaturfokus für alle interaktiven Elemente */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+}
